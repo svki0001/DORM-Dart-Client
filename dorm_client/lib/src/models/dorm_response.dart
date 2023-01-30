@@ -1,0 +1,18 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'dorm_response.g.dart';
+
+@JsonSerializable()
+class DORMResponse {
+  final Map<String, dynamic> body;
+  final List<Map<String, String>> errors;
+
+  DORMResponse({
+    required this.body,
+    this.errors = const [],
+  });
+
+  factory DORMResponse.fromJson(Map<String, dynamic> json) => _$DORMResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$DORMResponseToJson(this);
+}
