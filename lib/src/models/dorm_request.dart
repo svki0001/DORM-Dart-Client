@@ -1,5 +1,3 @@
-import 'package:dorm_client/src/configs/dorm_config.dart';
-
 class DORMRequest {
   List<DORMJob> jobs = [];
 
@@ -53,11 +51,7 @@ class DORMRequest {
     return add(job);
   }
 
-  Map<String, dynamic> toJson() => {
-        'schema': DORMConfig.schema,
-        'token': DORMConfig.token,
-        'jobs': jobs.map((job) => job.toJson()).toList(),
-      };
+  List<Map<String, dynamic>> toJson() => jobs.map((job) => job.toJson()).toList();
 }
 
 abstract class DORMJob {
