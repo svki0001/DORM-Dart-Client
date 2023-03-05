@@ -11,7 +11,7 @@ The DORM Dart Client provides easy-to-use classes for interacting with DORM API.
 
 The DORM supports a variety of databases, including MySQL and MSSQL. It provides a flexible and extensible architecture that allows developers to perform operations on databases and provides an API.
 
-You can learn more about the DORM on its [Github repository}(https://github.com/karolisdailidonis/DORM).
+You can learn more about the DORM on its [repository](https://github.com/karolisdailidonis/DORM).
 
 ## Usage
 
