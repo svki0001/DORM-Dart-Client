@@ -1,6 +1,3 @@
-import 'dart:mirrors';
-
-import 'package:dorm_client/dorm_client.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'dorm_response.g.dart';
