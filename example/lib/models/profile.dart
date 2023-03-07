@@ -1,11 +1,11 @@
-import 'package:dorm_client/dorm_client.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'profile.g.dart';
 
-@DORMTable("identspace_profile")
 @JsonSerializable()
 class Profile {
+  static final String tableName = "identspace_profile";
+
   final String id;
   final String name;
 

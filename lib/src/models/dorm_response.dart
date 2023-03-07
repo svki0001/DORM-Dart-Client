@@ -15,15 +15,8 @@ class DORMResponse {
     this.errors = const [],
   });
 
-  List<T>? rows<T>(T Function(dynamic) toElement) {
-    ClassMirror mirrow = reflectClass(T);
-    print(mirrow.metadata);
-    DORMTable table = mirrow.metadata.firstWhere((metadata) {
-      print(metadata.reflectee);
-      return metadata.reflectee is DORMTable;
-    }).reflectee;
-
-    List<dynamic>? bodyRows = body[table.tableName]["rows"];
+  List<T>? rows<T>(String tableName, T Function(dynamic) toElement) {
+    List<dynamic>? bodyRows = body[tableName]["rows"];
 
     List<T> result = bodyRows != null ? bodyRows.map(toElement).toList() : [];
 
