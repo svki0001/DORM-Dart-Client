@@ -9,12 +9,13 @@ DORM _dorm = DORM(
 
 void main(List<String> arguments) async {
   DORMRequest request = DORMRequest().addRead(
-    from: "identspace_profile",
+    from: Profile.tableName,
   );
 
   DORMResponse response = await _dorm.post(request);
 
-  List<Profile>? profiles = response.rows<Profile>(
+  List<Profile>? profiles = response.rows(
+    "identspace_profile",
     (json) => Profile.fromJson(json),
   );
 
