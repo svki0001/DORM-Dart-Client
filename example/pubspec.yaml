@@ -1,6 +1,7 @@
 name: dorm_example
 description: A sample command-line application for the DORM Client package.
 version: 1.0.0
+homepage: https://www.kirtz.eu
 
 publish_to: none
 

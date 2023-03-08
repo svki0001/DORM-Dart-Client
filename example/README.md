@@ -17,7 +17,7 @@ void main(List<String> arguments) async {
   DORMResponse response = await _dorm.post(request);
 
   List<Profile>? profiles = response.rows(
-    "identspace_profile",
+    "profile",
     (json) => Profile.fromJson(json),
   );
 
@@ -33,7 +33,7 @@ part 'profile.g.dart';
 
 @JsonSerializable()
 class Profile {
-  static final String tableName = "identspace_profile";
+  static final String tableName = "profile";
 
   final String id;
   final String name;
