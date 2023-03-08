@@ -24,9 +24,14 @@ import 'package:dorm_client/dorm_client.dart';
 To use the DORM Client, you need to have a class that represents the table in the database. For example, let's say we have a table named "profile" with two columns "id" and "name", we would create a Dart class named "Profile" like this:
 
 ```Dart
-@DORMTable("profile")
+import 'package:json_annotation/json_annotation.dart';
+
+part 'profile.g.dart';
+
 @JsonSerializable()
 class Profile {
+  static final String tableName = "profile";
+
   final String id;
   final String name;
 
@@ -46,13 +51,11 @@ class Profile {
 }
 ```
 
-Note the use of the ``@DORMTable`` annotation to specify the name of the table in the database.
-
 Next, create an instance of the ``DORM`` class, passing in the schema version, API URL, and token as arguments:
 
 ```Dart
 DORMRequest request = DORMRequest().addRead(
-    from: "profile",
+    from: Profile.tableName,
 );
 
 DORMResponse response = await _dorm.post(request);
@@ -61,8 +64,9 @@ DORMResponse response = await _dorm.post(request);
 The ``post`` method returns a ``DORMResponse`` object, which contains the response from the API. You can extract the rows from the response using the rows method, passing in a function to parse the JSON data into a Profile object:
 
 ```Dart
-List<Profile>? profiles = response.rows<Profile>(
-    (json) => Profile.fromJson(json),
+List<Profile>? profiles = response.rows(
+  Profile.tableName,
+  (json) => Profile.fromJson(json),
 );
 ```
 

@@ -7,11 +7,11 @@ class DORMRequest {
     return this;
   }
 
-  DORMRequest addRead({
-    from,
-    columns,
-    where,
-    join,
+  DORMRequest addRead<T>({
+    String? from,
+    List<DORMColumn>? columns,
+    List<DORMWhere<T>>? where,
+    DORMJoin? join,
   }) {
     final DORMRead job = DORMRead(
       from: from,
