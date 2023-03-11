@@ -1,3 +1,7 @@
+## 0.0.4
+
+- Added op, val1, val2 to DORMWhere.
+
 ## 0.0.3
 
 - Added parameter types to DORMRead constructor.
