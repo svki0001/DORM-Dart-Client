@@ -136,9 +136,10 @@ This class represents a read job to be executed on a database.
 - ``columns``: An optional List of ``DORMColumn`` objects that specifies which columns to include in the result.
 - ``where``: An optional List of ``DORMWhere`` objects that specifies the conditions to filter the result.
 - ``join``: An optional ``DORMJoin`` object that specifies a join to perform.
-- TODO: add order property
-- TODO: add embed property
-- TODO: add limit property
+- ``op``: An optional String that specifies an 'OR', 'AND' or 'BETWEEN' operator.
+- ``val1``: An optional String that specifies the first value for ranges like 'BETWEEN'.
+- ``val2``: An optional String that specifies the second value for ranges like 'BETWEEN'.
+
 
 #### Methods
 - ``toJson()``: Converts the job to a ``Map`` and returns it.

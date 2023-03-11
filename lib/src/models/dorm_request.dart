@@ -213,21 +213,40 @@ class DORMWhere<T> {
   final String column;
   final T value;
   final String condition;
-  // TODO: add op property
-  // TODO: add val1 property
-  // TODO: add val2 property
+  final String? op;
+  final String? val1;
+  final String? val2;
 
   DORMWhere({
     required this.column,
     required this.value,
     required this.condition,
+    this.op,
+    this.val1,
+    this.val2,
   });
 
-  Map<String, dynamic> toJson() => {
-        'column': column,
-        'value': value,
-        'condition': condition,
-      };
+  Map<String, dynamic> toJson() {
+    Map<String, dynamic> json = {
+      'column': column,
+      'value': value,
+      'condition': condition,
+    };
+
+    if (op != null) {
+      json['op'] = op;
+    }
+
+    if (val1 != null) {
+      json['val1'] = val1;
+    }
+
+    if (val2 != null) {
+      json['val2'] = val2;
+    }
+
+    return json;
+  }
 }
 
 class DORMValue<T> {
