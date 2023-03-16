@@ -1,3 +1,8 @@
+## 0.0.5
+
+- Added DORMReplace job.
+- errors in repsonses are now being printed in red to the terminal.
+
 ## 0.0.4
 
 - Added op, val1, val2 to DORMWhere.

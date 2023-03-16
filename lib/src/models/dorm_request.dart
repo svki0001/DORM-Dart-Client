@@ -51,6 +51,20 @@ class DORMRequest {
     return add(job);
   }
 
+  DORMRequest addReplace({
+    required String from,
+    required final List<DORMValue> values,
+    required final List<DORMWhere>? where,
+  }) {
+    final DORMReplace job = DORMReplace(
+      from: from,
+      values: values,
+      where: where,
+    );
+
+    return add(job);
+  }
+
   List<Map<String, dynamic>> toJson() => jobs.map((job) => job.toJson()).toList();
 }
 
@@ -188,6 +202,39 @@ class DORMDelete extends DORMJob {
   @override
   Map<String, dynamic> toJson() {
     Map<String, dynamic> json = super.toJson();
+
+    if (where != null) {
+      json['where'] = where!.map((whereElement) => whereElement.toJson()).toList();
+    }
+
+    return json;
+  }
+}
+
+class DORMReplace extends DORMJob {
+  final List<DORMValue> values;
+  final List<DORMWhere>? where;
+
+  DORMReplace({
+    required from,
+    required this.values,
+    this.where,
+  }) : super(
+          job: 'replace',
+          from: from,
+        );
+
+  @override
+  Map<String, dynamic> toJson() {
+    Map<String, dynamic> json = super.toJson();
+
+    Map<String, dynamic> replaceValues = {};
+
+    for (final value in values) {
+      replaceValues[value.columnName] = value.value.toString();
+    }
+
+    json["values"] = replaceValues;
 
     if (where != null) {
       json['where'] = where!.map((whereElement) => whereElement.toJson()).toList();

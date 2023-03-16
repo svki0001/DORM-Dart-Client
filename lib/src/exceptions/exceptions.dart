@@ -5,7 +5,7 @@ class DORMException implements Exception {
 
   @override
   String toString() {
-    return 'CustomException: $message';
+    return 'DORMException: $message';
   }
 }
 

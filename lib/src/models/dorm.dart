@@ -38,14 +38,14 @@ class DORM {
       Response rawData = await postRaw(request);
 
       if (rawData.data["errors"].isNotEmpty) {
-        throw DROMServerException(message: "The DORM server responded with: ${(rawData.data["errors"] as List<String>).join('\n')}");
+        print('\x31[94m' "The DORM server responded with: ${rawData.data["errors"].toString()}" '\x31[0m');
       }
 
       DORMResponse response = DORMResponse.fromJson(rawData.data);
 
       return response;
     } catch (error) {
-      throw DROMClientException(message: "Couldn't cast DORM response to DORMResponse object.");
+      throw DROMClientException(message: "Couldn't cast DORM response to DORMResponse object. \n ${error.toString()}");
     }
   }
 }

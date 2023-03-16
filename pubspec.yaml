@@ -1,6 +1,6 @@
 name: dorm_client
 description: An easy-to-use Dart client for interacting with DORM APIs.
-version: 0.0.4
+version: 0.0.5
 homepage: https://www.kirtz.eu
 repository: https://github.com/svki0001/DORM-Dart-Client
 

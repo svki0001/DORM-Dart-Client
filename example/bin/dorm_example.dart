@@ -3,21 +3,21 @@ import 'package:dorm_example/models/profile.dart';
 
 DORM _dorm = DORM(
   schema: "DORM 0.0.3",
-  url: "https://dorm.taskforce.space/api.php",
-  token: "1234556",
+  url: "http://technologielabor.stud.unixag.net/dorm/api.php",
+  token: "Bz2&1z2IwdW0",
 );
 
 void main(List<String> arguments) async {
   DORMRequest request = DORMRequest().addRead(
-    from: Profile.tableName,
+    from: "vtl_mask_aligner",
   );
 
   DORMResponse response = await _dorm.post(request);
 
-  List<Profile>? profiles = response.rows(
-    "identspace_profile",
-    (json) => Profile.fromJson(json),
-  );
+  // List<Profile>? profiles = response.rows(
+  //   "identspace_profile",
+  //   (json) => Profile.fromJson(json),
+  // );
 
-  print(profiles);
+  // print(profiles);
 }
