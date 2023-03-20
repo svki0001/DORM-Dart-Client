@@ -65,7 +65,8 @@ class DORMRequest {
     return add(job);
   }
 
-  List<Map<String, dynamic>> toJson() => jobs.map((job) => job.toJson()).toList();
+  List<Map<String, dynamic>> toJson() =>
+      jobs.map((job) => job.toJson()).toList();
 }
 
 abstract class DORMJob {
@@ -111,7 +112,8 @@ class DORMRead extends DORMJob {
     }
 
     if (where != null) {
-      json['where'] = where!.map((whereElement) => whereElement.toJson()).toList();
+      json['where'] =
+          where!.map((whereElement) => whereElement.toJson()).toList();
     }
 
     if (join != null) {
@@ -181,7 +183,8 @@ class DORMUpdate extends DORMJob {
     json["values"] = updateValues;
 
     if (where != null) {
-      json['where'] = where!.map((whereElement) => whereElement.toJson()).toList();
+      json['where'] =
+          where!.map((whereElement) => whereElement.toJson()).toList();
     }
 
     return json;
@@ -204,7 +207,8 @@ class DORMDelete extends DORMJob {
     Map<String, dynamic> json = super.toJson();
 
     if (where != null) {
-      json['where'] = where!.map((whereElement) => whereElement.toJson()).toList();
+      json['where'] =
+          where!.map((whereElement) => whereElement.toJson()).toList();
     }
 
     return json;
@@ -237,7 +241,8 @@ class DORMReplace extends DORMJob {
     json["values"] = replaceValues;
 
     if (where != null) {
-      json['where'] = where!.map((whereElement) => whereElement.toJson()).toList();
+      json['where'] =
+          where!.map((whereElement) => whereElement.toJson()).toList();
     }
 
     return json;

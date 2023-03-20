@@ -20,7 +20,8 @@ class DORMResponse {
     return result;
   }
 
-  factory DORMResponse.fromJson(Map<String, dynamic> json) => _$DORMResponseFromJson(json);
+  factory DORMResponse.fromJson(Map<String, dynamic> json) =>
+      _$DORMResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$DORMResponseToJson(this);
 }

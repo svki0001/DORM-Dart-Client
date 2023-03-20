@@ -24,12 +24,16 @@ class DORM {
         'jobs': request.toJson(),
       };
 
-      return await _dio.post(
+      Response response = await _dio.post(
         url,
         data: json,
       );
+
+      return response;
     } catch (error) {
-      throw DROMServerException(message: "Couldn't connect with DORM server. Please check if the server is running or your configuration is correct");
+      throw DROMServerException(
+          message:
+              "Couldn't connect with DORM server. Please check if the server is running or your configuration is correct. \n Error was: ${error.toString()}");
     }
   }
 
@@ -38,14 +42,16 @@ class DORM {
       Response rawData = await postRaw(request);
 
       if (rawData.data["errors"].isNotEmpty) {
-        print('\x31[94m' "The DORM server responded with: ${rawData.data["errors"].toString()}" '\x31[0m');
+        print('\x31[94m'
+            "The DORM server responded with: ${rawData.data["errors"].toString()}"
+            '\x31[0m');
       }
 
       DORMResponse response = DORMResponse.fromJson(rawData.data);
 
       return response;
     } catch (error) {
-      throw DROMClientException(message: "Couldn't cast DORM response to DORMResponse object. \n ${error.toString()}");
+      throw DROMClientException(message: "Couldn't cast DORM response to DORMResponse object. \n Error was: ${error.toString()}");
     }
   }
 }
