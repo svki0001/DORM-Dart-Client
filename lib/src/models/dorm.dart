@@ -51,7 +51,9 @@ class DORM {
 
       return response;
     } catch (error) {
-      throw DROMClientException(message: "Couldn't cast DORM response to DORMResponse object. \n Error was: ${error.toString()}");
+      throw DROMClientException(
+          message:
+              "Couldn't cast DORM response to DORMResponse object. \n Error was: ${error.toString()}");
     }
   }
 }
