@@ -1,3 +1,7 @@
+## 0.0.6
+
+- Added optional authToken parameter to post methods
+
 ## 0.0.5
 
 - Added DORMReplace job.

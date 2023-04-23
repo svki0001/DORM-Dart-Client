@@ -16,7 +16,7 @@ class DORM {
     required this.token,
   }); // your DORM token
 
-  Future<Response> postRaw(DORMRequest request) async {
+  Future<Response> postRaw(DORMRequest request, {String? authorization}) async {
     try {
       Map<String, dynamic> json = {
         'schema': schema,
@@ -27,6 +27,13 @@ class DORM {
       Response response = await _dio.post(
         url,
         data: json,
+        options: Options(
+          headers: {
+            'accept': 'application/json',
+            'contentTType': 'application/json',
+            if (authorization != null) "authorization": authorization,
+          },
+        ),
       );
 
       return response;
@@ -37,9 +44,9 @@ class DORM {
     }
   }
 
-  Future<DORMResponse> post(DORMRequest request) async {
+  Future<DORMResponse> post(DORMRequest request, {String? authorization}) async {
     try {
-      Response rawData = await postRaw(request);
+      Response rawData = await postRaw(request, authorization: authorization);
 
       if (rawData.data["errors"].isNotEmpty) {
         print('\x31[94m'
@@ -51,9 +58,7 @@ class DORM {
 
       return response;
     } catch (error) {
-      throw DROMClientException(
-          message:
-              "Couldn't cast DORM response to DORMResponse object. \n Error was: ${error.toString()}");
+      throw DROMClientException(message: "Couldn't cast DORM response to DORMResponse object. \n Error was: ${error.toString()}");
     }
   }
 }
