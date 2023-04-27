@@ -4,7 +4,7 @@
 -->
 
 <p align="center">
-  <a href="https://pub.dev/packages/pod_player"><img src="https://img.shields.io/pub/v/dorm_client?style=flat" alt="pub version"></a>
+  <a href="https://pub.dev/packages/dorm_client"><img src="https://img.shields.io/pub/v/dorm_client?style=flat" alt="pub version"></a>
 </p>
 
 A Dart client for interacting with DORM APIs.
