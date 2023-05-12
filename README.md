@@ -3,9 +3,10 @@
     Github: https://github.com/svki0001
 -->
 
-<p align="center">
-  <a href="https://pub.dev/packages/dorm_client"><img src="https://img.shields.io/pub/v/dorm_client?style=flat" alt="pub version"></a>
-</p>
+# DORM Dart Client
+
+  <a href="https://pub.dev/packages/dorm_client"><img src="https://img.shields.io/pub/v/dorm_client?style=flat" alt="pub version"></a> 
+  [![Generic badge](https://img.shields.io/badge/platform-android%20|%20ios%20|%20web%20|%20desktop-blue.svg)]([https://pub.dev/packages/flutter_iconpicker](https://pub.dev/packages/dorm_client))  
 
 A Dart client for interacting with DORM APIs.
 
