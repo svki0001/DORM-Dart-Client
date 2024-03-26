@@ -1,5 +1,9 @@
 ## 0.0.7
 
+- allow url overrides for the api url
+
+## 0.0.7
+
 - dorm_request can now nest logical operations
 
 ## 0.0.6
