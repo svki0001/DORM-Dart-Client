@@ -7,16 +7,17 @@ class DORM {
   final Dio _dio = Dio();
 
   final String schema; // e.g. DORM 0.0.6
-  final String url; // your DORM api location
+  String? url; // your default DORM api location
   final String token;
 
   DORM({
     required this.schema,
-    required this.url,
+    this.url,
     required this.token,
   }); // your DORM token
 
-  Future<Response> postRaw(DORMRequest request, {String? authorization}) async {
+  Future<Response> postRaw(DORMRequest request,
+      {String? overriddenUrl, String? authorization}) async {
     try {
       Map<String, dynamic> json = {
         'schema': schema,
@@ -24,8 +25,13 @@ class DORM {
         'jobs': request.toJson(),
       };
 
+      if (overriddenUrl == null && url == null) {
+        throw DORMException(
+            message: 'At leas a url or overriddenUrl needs to be set');
+      }
+
       Response response = await _dio.post(
-        url,
+        overriddenUrl ?? url!,
         data: json,
         options: Options(
           headers: {
@@ -44,9 +50,11 @@ class DORM {
     }
   }
 
-  Future<DORMResponse> post(DORMRequest request, {String? authorization}) async {
+  Future<DORMResponse> post(DORMRequest request,
+      {String? overriddenUrl, String? authorization}) async {
     try {
-      Response rawData = await postRaw(request, authorization: authorization);
+      Response rawData = await postRaw(request,
+          overriddenUrl: overriddenUrl, authorization: authorization);
 
       if (rawData.data["errors"].isNotEmpty) {
         print('\x31[94m'
@@ -58,7 +66,9 @@ class DORM {
 
       return response;
     } catch (error) {
-      throw DROMClientException(message: "Couldn't cast DORM response to DORMResponse object. \n Error was: ${error.toString()}");
+      throw DROMClientException(
+          message:
+              "Couldn't cast DORM response to DORMResponse object. \n Error was: ${error.toString()}");
     }
   }
 }
