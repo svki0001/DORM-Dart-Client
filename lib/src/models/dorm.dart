@@ -36,26 +36,36 @@ class DORM {
         options: Options(
           headers: {
             'accept': 'application/json',
-            'contentTType': 'application/json',
+            'contentType': 'application/json',
             if (authorization != null) "authorization": authorization,
           },
         ),
       );
 
       return response;
+      // } catch (error) {
+      //   throw DROMServerException(
+      //       message:
+      //           "Couldn't connect with DORM server. Please check if the server is running or your configuration is correct. \n Error was: ${error.toString()}");
+      // }
     } catch (error) {
-      throw DROMServerException(
+      int statusCode = 400;
+      if (error is DioException) {
+        statusCode = error.response?.statusCode ?? 500;
+      }
+      throw DORMClientException(
+          statusCode: statusCode,
           message:
-              "Couldn't connect with DORM server. Please check if the server is running or your configuration is correct. \n Error was: ${error.toString()}");
+              "Couln't not _postRaw_ to DORM server due to ${DORMStatusCodes.getDescription(statusCode)}.\n Error was: ${error.toString()}");
     }
   }
 
   Future<DORMResponse> post(DORMRequest request,
       {String? overriddenUrl, String? authorization}) async {
-    try {
-      Response rawData = await postRaw(request,
-          overriddenUrl: overriddenUrl, authorization: authorization);
+    Response rawData = await postRaw(request,
+        overriddenUrl: overriddenUrl, authorization: authorization);
 
+    try {
       if (rawData.data["errors"].isNotEmpty) {
         print('\x31[94m'
             "The DORM server responded with: ${rawData.data["errors"].toString()}"
@@ -66,9 +76,10 @@ class DORM {
 
       return response;
     } catch (error) {
-      throw DROMClientException(
+      throw DORMException(
+          statusCode: null,
           message:
-              "Couldn't cast DORM response to DORMResponse object. \n Error was: ${error.toString()}");
+              "Couldn't cast DORM response to DORMResponse object.\n Error was: ${error.toString()}");
     }
   }
 }
