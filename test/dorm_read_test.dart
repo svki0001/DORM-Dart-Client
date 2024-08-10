@@ -5,6 +5,7 @@ import 'package:dorm_client/src/models/before/dorm_from_base64.dart';
 import 'package:dorm_client/src/models/before/dorm_last_insert_id.dart';
 import 'package:dorm_client/src/models/dorm_column.dart';
 import 'package:dorm_client/src/models/dorm_join.dart';
+import 'package:dorm_client/src/models/dorm_order.dart';
 import 'package:dorm_client/src/models/dorm_where.dart';
 import 'package:dorm_client/src/models/jobs/dorm_read.dart';
 import 'package:test/test.dart';
@@ -50,6 +51,11 @@ void main() {
         'table2_name': 'column2_name',
       });
 
+      final order = DORMOrder(
+        column: 'column_name',
+        sort: 'DESC',
+      );
+
       final before = DORMBefore(
         jobs: [
           DORMLastInsertId(
@@ -71,6 +77,7 @@ void main() {
         columns: columns,
         where: where,
         join: join,
+        order: order,
         before: before,
         after: after,
       );
@@ -97,6 +104,10 @@ void main() {
         'join': {
           'table1_name': 'column1_name',
           'table2_name': 'column2_name',
+        },
+        'order': {
+          'column': 'column_name',
+          'sort': 'DESC',
         },
         'before': {
           'lastInsertId': {
