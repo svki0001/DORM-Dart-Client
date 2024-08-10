@@ -1,6 +1,6 @@
 import 'package:dorm_client/src/models/jobs/dorm_job.dart';
-import 'package:dorm_client/src/models/dorm_value.dart';
-import 'package:dorm_client/src/models/dorm_where.dart';
+import 'package:dorm_client/src/models/jobs/queries/dorm_value.dart';
+import 'package:dorm_client/src/models/jobs/queries/dorm_where.dart';
 
 class DORMReplace extends DORMJob {
   final List<DORMValue> values;

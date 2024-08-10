@@ -1,5 +1,5 @@
-import 'package:dorm_client/src/models/after/dorm_after.dart';
-import 'package:dorm_client/src/models/before/dorm_before.dart';
+import 'package:dorm_client/src/models/jobs/after/dorm_after.dart';
+import 'package:dorm_client/src/models/jobs/before/dorm_before.dart';
 
 abstract class DORMJob {
   final String job;
@@ -17,7 +17,7 @@ abstract class DORMJob {
   Map<String, dynamic> toJson() => {
         'job': job,
         'from': from,
-        if (before != null) ...before!.toJson(),
-        if (after != null) ...after!.toJson(),
+        if (before != null) 'before': before!.toJson(),
+        if (after != null) 'after': after!.toJson(),
       };
 }

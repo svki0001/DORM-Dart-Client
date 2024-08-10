@@ -19,26 +19,15 @@ class DORMWhere<T> {
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> json = {
-      'column': column,
-      'value': value,
+      if (column != null) 'column': column,
+      if (value != null) 'value': value.toString(),
       'condition': condition,
+      if (op != null) 'op': op,
+      if (val1 != null) 'val1': val1,
+      if (val2 != null) 'val2': val2,
+      if (where != null)
+        'where': where!.map((whereElement) => whereElement.toJson()).toList(),
     };
-
-    if (op != null) {
-      json['op'] = op;
-    }
-
-    if (val1 != null) {
-      json['val1'] = val1;
-    }
-
-    if (val2 != null) {
-      json['val2'] = val2;
-    }
-
-    if (where != null) {
-      json['where'] = where;
-    }
 
     return json;
   }

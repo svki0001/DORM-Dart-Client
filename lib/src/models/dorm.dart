@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:dorm_client/src/exceptions/exceptions.dart';
-import 'package:dorm_client/src/models/dorm_request.dart';
+import 'package:dorm_client/src/models/jobs/queries/dorm_request.dart';
 import 'package:dorm_client/src/models/dorm_response.dart';
 
 class DORM {

@@ -8,9 +8,7 @@ class DORMOrder {
   });
 
   Map<String, dynamic> toJson() => {
-        'order': {
-          'column': column,
-          'sort': sort,
-        },
+        'column': column,
+        'sort': sort,
       };
 }

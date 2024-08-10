@@ -1,4 +1,4 @@
-import 'package:dorm_client/src/models/after/dorm_after_job.dart';
+import 'package:dorm_client/src/models/jobs/after/dorm_after_job.dart';
 
 class DORMtoBase64 extends DORMAfterJob {
   final List<String> columns;

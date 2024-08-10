@@ -1,4 +1,4 @@
-import 'package:dorm_client/src/models/before/dorm_before_job.dart';
+import 'package:dorm_client/src/models/jobs/before/dorm_before_job.dart';
 
 class DORMLastInsertId extends DORMBeforeJob {
   final String fromTable;
