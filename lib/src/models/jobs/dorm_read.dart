@@ -1,5 +1,6 @@
 import 'package:dorm_client/src/models/dorm_column.dart';
 import 'package:dorm_client/src/models/dorm_join.dart';
+import 'package:dorm_client/src/models/dorm_order.dart';
 import 'package:dorm_client/src/models/jobs/dorm_job.dart';
 import 'package:dorm_client/src/models/dorm_where.dart';
 
@@ -7,7 +8,7 @@ class DORMRead extends DORMJob {
   final List<DORMColumn>? columns;
   late final List<DORMWhere>? where;
   DORMJoin? join;
-  // TODO: add order property
+  DORMOrder? order;
   // TODO: add embed property
   // TODO: add limit property
   // TODO: add embed property
@@ -17,6 +18,7 @@ class DORMRead extends DORMJob {
     this.columns,
     this.where,
     this.join,
+    this.order,
     super.before,
     super.after,
   }) : super(
@@ -39,6 +41,10 @@ class DORMRead extends DORMJob {
 
     if (join != null) {
       json['join'] = join!.toJson();
+    }
+
+    if (order != null) {
+      json.addAll(order!.toJson());
     }
 
     return json;
