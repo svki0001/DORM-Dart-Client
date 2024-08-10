@@ -1,15 +1,13 @@
-import 'package:dorm_client/src/models/before/dorm_before.dart';
 import 'package:dorm_client/src/models/dorm_job.dart';
 import 'package:dorm_client/src/models/dorm_value.dart';
 
 class DORMInsert extends DORMJob {
   final List<DORMValue> values;
-  final DORMBefore? before;
 
   DORMInsert({
     required from,
     required this.values,
-    this.before,
+    super.before,
   }) : super(
           job: 'insert',
           from: from,

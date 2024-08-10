@@ -10,6 +10,7 @@ class DORMReplace extends DORMJob {
     required from,
     required this.values,
     this.where,
+    super.before,
   }) : super(
           job: 'replace',
           from: from,
