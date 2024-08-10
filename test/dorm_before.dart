@@ -4,7 +4,7 @@ import 'package:dorm_client/src/models/before/dorm_last_insert_id.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('Cosntruction', () {
+  group('Construction', () {
     test('toJson should return an empty map when there are no jobs', () {
       final before = DORMBefore(jobs: []);
 
