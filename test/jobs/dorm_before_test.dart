@@ -1,6 +1,6 @@
-import 'package:dorm_client/src/models/before/dorm_before.dart';
-import 'package:dorm_client/src/models/before/dorm_from_base64.dart';
-import 'package:dorm_client/src/models/before/dorm_last_insert_id.dart';
+import 'package:dorm_client/src/models/jobs/before/dorm_before.dart';
+import 'package:dorm_client/src/models/jobs/before/dorm_from_base64.dart';
+import 'package:dorm_client/src/models/jobs/before/dorm_last_insert_id.dart';
 import 'package:test/test.dart';
 
 void main() {
@@ -8,9 +8,9 @@ void main() {
     test('toJson should return an empty map when there are no jobs', () {
       final before = DORMBefore(jobs: []);
 
-      expect(before.toJson(), {
-        'before': {},
-      });
+      final expected = {};
+
+      expect(before.toJson(), expected);
     });
 
     test('toJson should return a map with job data when there are jobs', () {
@@ -22,17 +22,15 @@ void main() {
 
       final before = DORMBefore(jobs: [job1, job2]);
 
-      final expectedJson = {
-        'before': {
-          'lastInsertId': {
-            'fromTable': 'last_insert_id_table_name',
-            'setColumn': 'column_name',
-          },
-          'fromBase64': ['picture', 'file'],
+      final expected = {
+        'lastInsertId': {
+          'fromTable': 'last_insert_id_table_name',
+          'setColumn': 'column_name',
         },
+        'fromBase64': ['picture', 'file'],
       };
 
-      expect(before.toJson(), expectedJson);
+      expect(before.toJson(), expected);
     });
   });
 }

@@ -1,17 +1,17 @@
-import 'package:dorm_client/src/models/dorm_column.dart';
-import 'package:dorm_client/src/models/dorm_embed.dart';
-import 'package:dorm_client/src/models/dorm_join.dart';
-import 'package:dorm_client/src/models/dorm_order.dart';
+import 'package:dorm_client/src/models/jobs/queries/dorm_column.dart';
+import 'package:dorm_client/src/models/jobs/queries/dorm_embed.dart';
+import 'package:dorm_client/src/models/jobs/queries/dorm_join.dart';
+import 'package:dorm_client/src/models/jobs/queries/dorm_order.dart';
 import 'package:dorm_client/src/models/jobs/dorm_job.dart';
-import 'package:dorm_client/src/models/dorm_where.dart';
+import 'package:dorm_client/src/models/jobs/queries/dorm_where.dart';
 
 class DORMRead extends DORMJob {
   final List<DORMColumn>? columns;
   late final List<DORMWhere>? where;
-  DORMJoin? join;
-  DORMOrder? order;
-  int? limit;
-  DormEmbed? embed;
+  final List<DORMJoin>? join;
+  final DORMOrder? order;
+  final int? limit;
+  final List<DORMEmbed>? embed;
 
   DORMRead({
     required from,
@@ -32,30 +32,23 @@ class DORMRead extends DORMJob {
   Map<String, dynamic> toJson() {
     Map<String, dynamic> json = super.toJson();
 
-    if (columns != null) {
-      json['columns'] = columns!.map((column) => column.toJson()).toList();
-    }
-
-    if (where != null) {
-      json['where'] =
-          where!.map((whereElement) => whereElement.toJson()).toList();
-    }
+    Map<String, dynamic> readJson = {
+      if (columns != null)
+        'columns': columns!.map((column) => column.toJson()).toList(),
+      if (where != null)
+        'where': where!.map((whereElement) => whereElement.toJson()).toList(),
+      if (order != null) 'order': order!.toJson(),
+      if (limit != null) 'limit': limit,
+      if (embed != null)
+        'embed': embed!.map((embedElement) => embedElement.toJson()).toList(),
+    };
 
     if (join != null) {
-      json['join'] = join!.toJson();
+      readJson['join'] =
+          join!.map((joinElement) => joinElement.toJson()).toList();
     }
 
-    if (order != null) {
-      json.addAll(order!.toJson());
-    }
-
-    if (limit != null) {
-      json['limit'] = limit;
-    }
-
-    if (embed != null) {
-      json.addAll(embed!.toJson());
-    }
+    json.addAll(readJson);
 
     return json;
   }

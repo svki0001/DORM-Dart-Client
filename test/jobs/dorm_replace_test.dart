@@ -1,10 +1,10 @@
-import 'package:dorm_client/src/models/after/dorm_after.dart';
-import 'package:dorm_client/src/models/after/dorm_to_base64.dart';
-import 'package:dorm_client/src/models/before/dorm_before.dart';
-import 'package:dorm_client/src/models/before/dorm_from_base64.dart';
-import 'package:dorm_client/src/models/before/dorm_last_insert_id.dart';
-import 'package:dorm_client/src/models/dorm_value.dart';
-import 'package:dorm_client/src/models/dorm_where.dart';
+import 'package:dorm_client/src/models/jobs/after/dorm_after.dart';
+import 'package:dorm_client/src/models/jobs/after/dorm_to_base64.dart';
+import 'package:dorm_client/src/models/jobs/before/dorm_before.dart';
+import 'package:dorm_client/src/models/jobs/before/dorm_from_base64.dart';
+import 'package:dorm_client/src/models/jobs/before/dorm_last_insert_id.dart';
+import 'package:dorm_client/src/models/jobs/queries/dorm_value.dart';
+import 'package:dorm_client/src/models/jobs/queries/dorm_where.dart';
 import 'package:dorm_client/src/models/jobs/dorm_replace.dart';
 import 'package:test/test.dart';
 
@@ -18,11 +18,13 @@ void main() {
         values: [],
       );
 
-      expect(replace.toJson(), {
+      final expected = {
         'job': 'replace',
         'from': tableName,
         'values': {},
-      });
+      };
+
+      expect(replace.toJson(), expected);
     });
 
     test('Maximal object construction', () {
@@ -70,7 +72,7 @@ void main() {
         after: after,
       );
 
-      expect(replace.toJson(), {
+      final expected = {
         'job': 'replace',
         'from': tableName,
         'values': {
@@ -99,7 +101,9 @@ void main() {
         'after': {
           'toBase64': ['picture', 'file'],
         },
-      });
+      };
+
+      expect(replace.toJson(), expected);
     });
   });
 }

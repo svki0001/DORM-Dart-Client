@@ -8,7 +8,6 @@ class DORMValue<T> {
   });
 
   Map<String, dynamic> toJson() => {
-        "columnName": columnName,
-        "value": value.toString(),
+        columnName: value.toString(),
       };
 }

@@ -1,13 +1,13 @@
-import 'package:dorm_client/src/models/after/dorm_after.dart';
-import 'package:dorm_client/src/models/after/dorm_to_base64.dart';
-import 'package:dorm_client/src/models/before/dorm_before.dart';
-import 'package:dorm_client/src/models/before/dorm_from_base64.dart';
-import 'package:dorm_client/src/models/before/dorm_last_insert_id.dart';
-import 'package:dorm_client/src/models/dorm_column.dart';
-import 'package:dorm_client/src/models/dorm_embed.dart';
-import 'package:dorm_client/src/models/dorm_join.dart';
-import 'package:dorm_client/src/models/dorm_order.dart';
-import 'package:dorm_client/src/models/dorm_where.dart';
+import 'package:dorm_client/src/models/jobs/after/dorm_after.dart';
+import 'package:dorm_client/src/models/jobs/after/dorm_to_base64.dart';
+import 'package:dorm_client/src/models/jobs/before/dorm_before.dart';
+import 'package:dorm_client/src/models/jobs/before/dorm_from_base64.dart';
+import 'package:dorm_client/src/models/jobs/before/dorm_last_insert_id.dart';
+import 'package:dorm_client/src/models/jobs/queries/dorm_column.dart';
+import 'package:dorm_client/src/models/jobs/queries/dorm_embed.dart';
+import 'package:dorm_client/src/models/jobs/queries/dorm_join.dart';
+import 'package:dorm_client/src/models/jobs/queries/dorm_order.dart';
+import 'package:dorm_client/src/models/jobs/queries/dorm_where.dart';
 import 'package:dorm_client/src/models/jobs/dorm_read.dart';
 import 'package:test/test.dart';
 
@@ -20,10 +20,12 @@ void main() {
         from: tableName,
       );
 
-      expect(read.toJson(), {
+      final expected = {
         'job': 'read',
         'from': tableName,
-      });
+      };
+
+      expect(read.toJson(), expected);
     });
 
     test('Maximal object construction', () {
@@ -47,10 +49,14 @@ void main() {
         ),
       ];
 
-      final join = DORMJoin(jobsColumns: {
-        'table1_name': 'column1_name',
-        'table2_name': 'column2_name',
-      });
+      final joins = [
+        DORMJoin(
+          joins: [
+            (tableName: 'table1_name', columnName: 'column1_name'),
+            (tableName: 'table2_name', columnName: 'column2_name'),
+          ],
+        ),
+      ];
 
       final order = DORMOrder(
         column: 'column_name',
@@ -59,10 +65,10 @@ void main() {
 
       final limit = 1000;
 
-      final embed = DormEmbed(embeds: [
-        {'table': 'embed1_table_name'},
-        {'table': 'embed2_table_name'},
-      ]);
+      final embeds = [
+        DORMEmbed(table: 'embed1_table_name'),
+        DORMEmbed(table: 'embed2_table_name'),
+      ];
 
       final before = DORMBefore(
         jobs: [
@@ -84,15 +90,15 @@ void main() {
         from: tableName,
         columns: columns,
         where: where,
-        join: join,
+        join: joins,
         order: order,
         limit: limit,
-        embed: embed,
+        embed: embeds,
         before: before,
         after: after,
       );
 
-      expect(read.toJson(), {
+      final expected = {
         'job': 'read',
         'from': tableName,
         'columns': [
@@ -111,10 +117,12 @@ void main() {
             'condition': '=',
           },
         ],
-        'join': {
-          'table1_name': 'column1_name',
-          'table2_name': 'column2_name',
-        },
+        'join': [
+          {
+            'table1_name': 'column1_name',
+            'table2_name': 'column2_name',
+          },
+        ],
         'order': {
           'column': 'column_name',
           'sort': 'DESC',
@@ -134,7 +142,9 @@ void main() {
         'after': {
           'toBase64': ['picture', 'file'],
         },
-      });
+      };
+
+      expect(read.toJson(), expected);
     });
   });
 }
