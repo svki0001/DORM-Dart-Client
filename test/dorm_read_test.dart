@@ -56,6 +56,8 @@ void main() {
         sort: 'DESC',
       );
 
+      final limit = 1000;
+
       final before = DORMBefore(
         jobs: [
           DORMLastInsertId(
@@ -78,6 +80,7 @@ void main() {
         where: where,
         join: join,
         order: order,
+        limit: limit,
         before: before,
         after: after,
       );
@@ -109,6 +112,7 @@ void main() {
           'column': 'column_name',
           'sort': 'DESC',
         },
+        'limit': 1000,
         'before': {
           'lastInsertId': {
             'fromTable': 'last_insert_id_table_name',

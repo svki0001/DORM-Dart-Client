@@ -9,8 +9,8 @@ class DORMRead extends DORMJob {
   late final List<DORMWhere>? where;
   DORMJoin? join;
   DORMOrder? order;
+  int? limit;
   // TODO: add embed property
-  // TODO: add limit property
   // TODO: add embed property
 
   DORMRead({
@@ -19,6 +19,7 @@ class DORMRead extends DORMJob {
     this.where,
     this.join,
     this.order,
+    this.limit,
     super.before,
     super.after,
   }) : super(
@@ -45,6 +46,10 @@ class DORMRead extends DORMJob {
 
     if (order != null) {
       json.addAll(order!.toJson());
+    }
+
+    if (limit != null) {
+      json['limit'] = limit;
     }
 
     return json;
