@@ -18,5 +18,6 @@ abstract class DORMJob {
         'job': job,
         'from': from,
         if (before != null) ...before!.toJson(),
+        if (after != null) ...after!.toJson(),
       };
 }

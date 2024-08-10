@@ -1,10 +1,11 @@
 import 'package:dorm_client/src/models/before/dorm_before.dart';
 import 'package:dorm_client/src/models/dorm_column.dart';
-import 'package:dorm_client/src/models/dorm_insert.dart';
-import 'package:dorm_client/src/models/dorm_job.dart';
-import 'package:dorm_client/src/models/dorm_read.dart';
-import 'package:dorm_client/src/models/dorm_replace.dart';
-import 'package:dorm_client/src/models/dorm_update.dart';
+import 'package:dorm_client/src/models/dorm_join.dart';
+import 'package:dorm_client/src/models/jobs/dorm_insert.dart';
+import 'package:dorm_client/src/models/jobs/dorm_job.dart';
+import 'package:dorm_client/src/models/jobs/dorm_read.dart';
+import 'package:dorm_client/src/models/jobs/dorm_replace.dart';
+import 'package:dorm_client/src/models/jobs/dorm_update.dart';
 import 'package:dorm_client/src/models/dorm_value.dart';
 import 'package:dorm_client/src/models/dorm_where.dart';
 
@@ -21,7 +22,7 @@ class DORMRequest {
     String? from,
     List<DORMColumn>? columns,
     List<DORMWhere<T>>? where,
-    DORMJob? join,
+    DORMJoin? join,
   }) {
     final DORMRead job = DORMRead(
       from: from,

@@ -1,14 +1,16 @@
 import 'package:dorm_client/src/models/dorm_column.dart';
-import 'package:dorm_client/src/models/dorm_job.dart';
+import 'package:dorm_client/src/models/dorm_join.dart';
+import 'package:dorm_client/src/models/jobs/dorm_job.dart';
 import 'package:dorm_client/src/models/dorm_where.dart';
 
 class DORMRead extends DORMJob {
   final List<DORMColumn>? columns;
   late final List<DORMWhere>? where;
-  DORMJob? join;
+  DORMJoin? join;
   // TODO: add order property
   // TODO: add embed property
   // TODO: add limit property
+  // TODO: add embed property
 
   DORMRead({
     required from,

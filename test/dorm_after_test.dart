@@ -3,12 +3,12 @@ import 'package:dorm_client/src/models/after/dorm_to_base64.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('Construction', () {
+  group('After Construction', () {
     test('toJson should return an empty map when there are no jobs', () {
       final after = DORMAfter(jobs: []);
 
       expect(after.toJson(), {
-        "after": {},
+        'after': {},
       });
     });
 
@@ -18,8 +18,8 @@ void main() {
       final after = DORMAfter(jobs: [job1]);
 
       final expectedJson = {
-        "after": {
-          "toBase64": ['picture', 'file'],
+        'after': {
+          'toBase64': ['picture', 'file'],
         },
       };
 

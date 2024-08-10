@@ -1,4 +1,4 @@
-import 'package:dorm_client/src/models/dorm_job.dart';
+import 'package:dorm_client/src/models/jobs/dorm_job.dart';
 import 'package:dorm_client/src/models/dorm_value.dart';
 
 class DORMInsert extends DORMJob {

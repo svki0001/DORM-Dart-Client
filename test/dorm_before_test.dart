@@ -4,18 +4,18 @@ import 'package:dorm_client/src/models/before/dorm_last_insert_id.dart';
 import 'package:test/test.dart';
 
 void main() {
-  group('Construction', () {
+  group('Before Construction', () {
     test('toJson should return an empty map when there are no jobs', () {
       final before = DORMBefore(jobs: []);
 
       expect(before.toJson(), {
-        "before": {},
+        'before': {},
       });
     });
 
     test('toJson should return a map with job data when there are jobs', () {
       final job1 = DORMLastInsertId(
-        fromTable: 'table_name',
+        fromTable: 'last_insert_id_table_name',
         setColumn: 'column_name',
       );
       final job2 = DORMFromBase64(['picture', 'file']);
@@ -23,12 +23,12 @@ void main() {
       final before = DORMBefore(jobs: [job1, job2]);
 
       final expectedJson = {
-        "before": {
-          "lastInsertId": {
-            "fromTable": "table_name",
-            "setColumn": "column_name",
+        'before': {
+          'lastInsertId': {
+            'fromTable': 'last_insert_id_table_name',
+            'setColumn': 'column_name',
           },
-          "fromBase64": ['picture', 'file'],
+          'fromBase64': ['picture', 'file'],
         },
       };
 
