@@ -1,4 +1,5 @@
 import 'package:dorm_client/src/models/dorm_column.dart';
+import 'package:dorm_client/src/models/dorm_embed.dart';
 import 'package:dorm_client/src/models/dorm_join.dart';
 import 'package:dorm_client/src/models/dorm_order.dart';
 import 'package:dorm_client/src/models/jobs/dorm_job.dart';
@@ -10,8 +11,7 @@ class DORMRead extends DORMJob {
   DORMJoin? join;
   DORMOrder? order;
   int? limit;
-  // TODO: add embed property
-  // TODO: add embed property
+  DormEmbed? embed;
 
   DORMRead({
     required from,
@@ -20,6 +20,7 @@ class DORMRead extends DORMJob {
     this.join,
     this.order,
     this.limit,
+    this.embed,
     super.before,
     super.after,
   }) : super(
@@ -50,6 +51,10 @@ class DORMRead extends DORMJob {
 
     if (limit != null) {
       json['limit'] = limit;
+    }
+
+    if (embed != null) {
+      json.addAll(embed!.toJson());
     }
 
     return json;
