@@ -8,7 +8,7 @@ class DORMLastInsertId {
   });
 
   Map<String, dynamic> toJson() => {
-        "fromtTable": fromTable,
+        "fromTable": fromTable,
         "setColumn": setColumn,
       };
 }
