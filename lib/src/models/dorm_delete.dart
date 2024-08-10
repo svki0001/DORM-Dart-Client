@@ -8,6 +8,7 @@ class DORMDelete extends DORMJob {
     required from,
     this.where,
     super.before,
+    super.after,
   }) : super(
           job: 'delete',
           from: from,

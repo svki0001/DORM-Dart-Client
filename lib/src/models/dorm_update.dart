@@ -10,6 +10,7 @@ class DORMUpdate extends DORMJob {
     required from,
     required this.values,
     this.where,
+    super.after,
   }) : super(
           job: 'update',
           from: from,
