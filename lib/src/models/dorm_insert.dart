@@ -1,4 +1,4 @@
-import 'package:dorm_client/src/models/dorm_before.dart';
+import 'package:dorm_client/src/models/before/dorm_before.dart';
 import 'package:dorm_client/src/models/dorm_job.dart';
 import 'package:dorm_client/src/models/dorm_value.dart';
 
@@ -28,7 +28,7 @@ class DORMInsert extends DORMJob {
     json["values"] = insertValues;
 
     if (before != null) {
-      json["before"] = before!.toJson();
+      json.addAll(before!.toJson());
     }
 
     return json;

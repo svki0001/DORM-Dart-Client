@@ -1,4 +1,4 @@
-import 'package:dorm_client/src/models/dorm_before.dart';
+import 'package:dorm_client/src/models/before/dorm_before.dart';
 import 'package:dorm_client/src/models/dorm_column.dart';
 import 'package:dorm_client/src/models/dorm_insert.dart';
 import 'package:dorm_client/src/models/dorm_job.dart';
