@@ -8,6 +8,7 @@ class DORMInsert extends DORMJob {
     required from,
     required this.values,
     super.before,
+    super.after,
   }) : super(
           job: 'insert',
           from: from,

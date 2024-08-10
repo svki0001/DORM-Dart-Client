@@ -16,6 +16,7 @@ class DORMRead extends DORMJob {
     this.where,
     this.join,
     super.before,
+    super.after,
   }) : super(
           job: 'read',
           from: from,
