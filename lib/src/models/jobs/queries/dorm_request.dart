@@ -77,8 +77,38 @@ class DORMRequest extends Equatable {
     return add(job);
   }
 
+  DORMRequest();
+
   List<Map<String, dynamic>> toJson() =>
       jobs.map((job) => job.toJson()).toList();
+
+  // TODO: Test this
+  factory DORMRequest.fromJson(List<Map<String, dynamic>> json) {
+    final DORMRequest request = DORMRequest();
+
+    for (final Map<String, dynamic> job in json) {
+      final String type = job['type'];
+
+      switch (type) {
+        case 'read':
+          request.add(DORMRead.fromJson(job));
+          break;
+        case 'insert':
+          request.add(DORMInsert.fromJson(job));
+          break;
+        case 'update':
+          request.add(DORMUpdate.fromJson(job));
+          break;
+        case 'replace':
+          request.add(DORMReplace.fromJson(job));
+          break;
+        default:
+          throw Exception('Invalid job type');
+      }
+    }
+
+    return request;
+  }
 
   @override
   List<Object?> get props => [jobs];

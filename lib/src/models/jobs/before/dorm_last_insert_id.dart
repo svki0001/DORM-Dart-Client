@@ -17,6 +17,14 @@ class DORMLastInsertId extends DORMBeforeJob {
         },
       };
 
+  // TODO: Test this
+  factory DORMLastInsertId.fromJson(Map<String, dynamic> json) {
+    return DORMLastInsertId(
+      fromTable: json['fromTable'],
+      setColumn: json['setColumn'],
+    );
+  }
+
   @override
   List<Object?> get props => [fromTable, setColumn];
 }

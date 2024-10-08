@@ -26,6 +26,16 @@ class DORMDelete extends DORMJob {
     return json;
   }
 
+  // TODO: Test this
+  factory DORMDelete.fromJson(Map<String, dynamic> json) {
+    return DORMDelete(
+      from: json['from'],
+      where: (json['where'] as List<dynamic>?)
+          ?.map((whereElement) => DORMWhere.fromJson(whereElement))
+          .toList(),
+    );
+  }
+
   @override
   List<Object?> get props => [from, where, before, after];
 }

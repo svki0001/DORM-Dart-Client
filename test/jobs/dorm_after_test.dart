@@ -23,6 +23,29 @@ void main() {
 
       expect(after.toJson(), expected);
     });
+
+    test('fromJson should return an empty object when there are no jobs', () {
+      final after = DORMAfter.fromJson({});
+
+      expect(after.jobs, []);
+    });
+
+    // TODO: check json from DORM
+    test('fromJson should return a list of jobs when there are jobs', () {
+      final compareJob1 = DORMtoBase64(['picture', 'file']);
+
+      final json = {
+        'toBase64': ['picture', 'file'],
+      };
+
+      final equalJob1 = DORMtoBase64.fromJson(json);
+      final compareAfter = DORMAfter(jobs: [compareJob1]);
+      final equalAfter = DORMAfter.fromJson(json);
+
+      expect(compareAfter, equalAfter);
+      expect(compareAfter.jobs[0], equalAfter.jobs[0]);
+      expect(compareAfter.jobs[0], equalJob1);
+    });
   });
 
   group('Default class functions', () {

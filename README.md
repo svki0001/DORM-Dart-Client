@@ -45,7 +45,8 @@ class Profile {
     required this.name,
   });
 
-  factory Profile.fromJson(Map<String, dynamic> json) => _$ProfileFromJson(json);
+  // TODO: Test this
+factory Profile.fromJson(Map<String, dynamic> json) => _$ProfileFromJson(json);
 
   Map<String, dynamic> toJson() => _$ProfileToJson(this);
 

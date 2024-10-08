@@ -18,6 +18,25 @@ void main() {
 
       expect(value.toJson(), expected);
     });
+
+    test('fromJson construction', () {
+      final String columnName = 'column_name';
+      final String columnValue = 'column_value';
+
+      final compareValue = DORMValue<String>(
+        columnName: columnName,
+        value: columnValue,
+      );
+
+      final json = {
+        columnName: columnValue,
+      };
+
+      // Note: Don't forget to add the type parameter to the fromJson method
+      final equalValue = DORMValue<String>.fromJson(json);
+
+      expect(compareValue, equalValue);
+    });
   });
 
   group('Default class functions', () {

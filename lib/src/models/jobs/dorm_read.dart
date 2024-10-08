@@ -53,6 +53,27 @@ class DORMRead extends DORMJob {
     return json;
   }
 
+  // TODO: Test this
+  factory DORMRead.fromJson(Map<String, dynamic> json) {
+    return DORMRead(
+      from: json['from'],
+      columns: (json['columns'] as List<dynamic>?)
+          ?.map((column) => DORMColumn.fromJson(column))
+          .toList(),
+      where: (json['where'] as List<dynamic>?)
+          ?.map((whereElement) => DORMWhere.fromJson(whereElement))
+          .toList(),
+      join: (json['join'] as List<dynamic>?)
+          ?.map((joinElement) => DORMJoin.fromJson(joinElement))
+          .toList(),
+      order: json['order'] != null ? DORMOrder.fromJson(json['order']) : null,
+      limit: json['limit'],
+      embed: (json['embed'] as List<dynamic>?)
+          ?.map((embedElement) => DORMEmbed.fromJson(embedElement))
+          .toList(),
+    );
+  }
+
   @override
   List<Object?> get props =>
       [from, columns, where, join, order, limit, embed, before, after];

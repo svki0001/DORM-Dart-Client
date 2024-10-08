@@ -1,5 +1,6 @@
 import 'package:dorm_client/src/models/jobs/after/dorm_after_job.dart';
 import 'package:equatable/equatable.dart';
+import 'package:dorm_client/src/models/jobs/after/dorm_to_base64.dart';
 
 class DORMAfter extends Equatable {
   final List<DORMAfterJob> jobs;
@@ -16,6 +17,23 @@ class DORMAfter extends Equatable {
     }
 
     return json;
+  }
+
+  // TODO: Test this
+  factory DORMAfter.fromJson(Map<String, dynamic> json) {
+    List<DORMAfterJob> jobs = [];
+
+    for (var key in json.keys) {
+      switch (key) {
+        case 'toBase64':
+          jobs.add(DORMtoBase64.fromJson(json));
+          break;
+        default:
+          throw Exception('Unknown DORMAfterJob: $key');
+      }
+    }
+
+    return DORMAfter(jobs: jobs);
   }
 
   @override

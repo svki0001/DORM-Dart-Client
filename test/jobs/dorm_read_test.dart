@@ -146,6 +146,127 @@ void main() {
 
       expect(read.toJson(), expected);
     });
+
+    test('fromJson with Maximal object construction', () {
+      final tableName = 'table_name';
+
+      final columns = [
+        DORMColumn(column: 'column1_name'),
+        DORMColumn(column: 'column2_name'),
+      ];
+
+      final where = [
+        DORMWhere<dynamic>(
+          column: 'column1_name',
+          value: 'column1_value',
+          condition: '=',
+        ),
+        DORMWhere<dynamic>(
+          column: 'column2_name',
+          value: 'column2_value',
+          condition: '=',
+        ),
+      ];
+
+      final joins = [
+        DORMJoin(
+          joins: [
+            (tableName: 'table1_name', columnName: 'column1_name'),
+            (tableName: 'table2_name', columnName: 'column2_name'),
+          ],
+        ),
+      ];
+
+      final order = DORMOrder(
+        column: 'column_name',
+        sort: 'DESC',
+      );
+
+      final limit = 1000;
+
+      final embeds = [
+        DORMEmbed(table: 'embed1_table_name'),
+        DORMEmbed(table: 'embed2_table_name'),
+      ];
+
+      final before = DORMBefore(
+        jobs: [
+          DORMLastInsertId(
+            fromTable: 'last_insert_id_table_name',
+            setColumn: 'column_name',
+          ),
+          DORMFromBase64(['picture', 'file']),
+        ],
+      );
+
+      final after = DORMAfter(
+        jobs: [
+          DORMtoBase64(['picture', 'file']),
+        ],
+      );
+
+      final read = DORMRead(
+        from: tableName,
+        columns: columns,
+        where: where,
+        join: joins,
+        order: order,
+        limit: limit,
+        embed: embeds,
+        before: before,
+        after: after,
+      );
+
+      final json = {
+        'job': 'read',
+        'from': tableName,
+        'columns': [
+          {'column': 'column1_name'},
+          {'column': 'column2_name'},
+        ],
+        'where': [
+          {
+            'column': 'column1_name',
+            'value': 'column1_value',
+            'condition': '=',
+          },
+          {
+            'column': 'column2_name',
+            'value': 'column2_value',
+            'condition': '=',
+          },
+        ],
+        'join': [
+          {
+            'table1_name': 'column1_name',
+            'table2_name': 'column2_name',
+          },
+        ],
+        'order': {
+          'column': 'column_name',
+          'sort': 'DESC',
+        },
+        'limit': 1000,
+        'embed': [
+          {'table': 'embed1_table_name'},
+          {'table': 'embed2_table_name'},
+        ],
+        'before': {
+          'lastInsertId': {
+            'fromTable': 'last_insert_id_table_name',
+            'setColumn': 'column_name',
+          },
+          'fromBase64': ['picture', 'file'],
+        },
+        'after': {
+          'toBase64': ['picture', 'file'],
+        },
+      };
+
+      final readFromJson = DORMRead.fromJson(json);
+
+      expect(readFromJson, read);
+    });
   });
 
   group('Default class functions', () {

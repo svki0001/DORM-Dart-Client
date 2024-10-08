@@ -18,6 +18,25 @@ void main() {
 
       expect(join.toJson(), expected);
     });
+
+    // TODO: Check json from DORM
+    test('fromJson construction', () {
+      final compareJoin = DORMJoin(
+        joins: [
+          (tableName: 'table1_name', columnName: 'column1_name'),
+          (tableName: 'table2_name', columnName: 'column2_name'),
+        ],
+      );
+
+      final json = {
+        'table1_name': 'column1_name',
+        'table2_name': 'column2_name',
+      };
+
+      final equalJoin = DORMJoin.fromJson(json);
+
+      expect(compareJoin, equalJoin);
+    });
   });
 
   group('Default class functions', () {

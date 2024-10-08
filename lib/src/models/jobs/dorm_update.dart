@@ -37,6 +37,27 @@ class DORMUpdate extends DORMJob {
     return json;
   }
 
+  // TODO: Test this
+  factory DORMUpdate.fromJson(Map<String, dynamic> json) {
+    return DORMUpdate(
+      from: json['from'],
+      values: (json['values'] as Map<String, dynamic>)
+          .entries
+          .map(
+            (e) => DORMValue.fromJson(
+              {
+                'columnName': e.key,
+                'value': e.value,
+              },
+            ),
+          )
+          .toList(),
+      where: (json['where'] as List<dynamic>?)
+          ?.map((whereElement) => DORMWhere.fromJson(whereElement))
+          .toList(),
+    );
+  }
+
   @override
   List<Object?> get props => [from, values, where, before, after];
 }

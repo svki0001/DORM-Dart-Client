@@ -105,6 +105,81 @@ void main() {
 
       expect(update.toJson(), expected);
     });
+
+    test('fromJson with Maximal object construction', () {
+      final tableName = 'table_name';
+
+      final values = [
+        DORMValue<dynamic>(columnName: 'column1_name', value: 'column1_value'),
+        DORMValue<dynamic>(columnName: 'column2_name', value: 'column2_value'),
+      ];
+
+      final where = [
+        DORMWhere<dynamic>(
+          column: 'column1_name',
+          value: 'column1_value',
+          condition: '=',
+        ),
+        DORMWhere<dynamic>(
+          column: 'column2_name',
+          value: 'column2_value',
+          condition: '=',
+        ),
+      ];
+
+      final before = DORMBefore(
+        jobs: [
+          DORMLastInsertId(
+            fromTable: 'last_insert_id_table_name',
+            setColumn: 'column_name',
+          ),
+          DORMFromBase64(['picture', 'file']),
+        ],
+      );
+
+      final after = DORMAfter(
+        jobs: [
+          DORMtoBase64(['picture', 'file']),
+        ],
+      );
+
+      final update = DORMUpdate.fromJson({
+        'job': 'update',
+        'from': tableName,
+        'values': {
+          'column1_name': 'column1_value',
+          'column2_name': 'column2_value',
+        },
+        'where': [
+          {
+            'column': 'column1_name',
+            'value': 'column1_value',
+            'condition': '=',
+          },
+          {
+            'column': 'column2_name',
+            'value': 'column2_value',
+            'condition': '=',
+          },
+        ],
+        'before': {
+          'lastInsertId': {
+            'fromTable': 'last_insert_id_table_name',
+            'setColumn': 'column_name',
+          },
+          'fromBase64': ['picture', 'file'],
+        },
+        'after': {
+          'toBase64': ['picture', 'file'],
+        },
+      });
+
+      expect(update.from, tableName);
+      expect(update.values, values);
+      expect(update.where, where);
+      expect(update.before, before);
+      expect(update.after, after);
+    });
   });
 
   test('Update to JSON', () {

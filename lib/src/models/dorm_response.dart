@@ -20,6 +20,7 @@ class DORMResponse {
     return result;
   }
 
+  // TODO: Test this
   factory DORMResponse.fromJson(Map<String, dynamic> json) =>
       _$DORMResponseFromJson(json);
 

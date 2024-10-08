@@ -12,6 +12,18 @@ void main() {
 
       expect(embed.toJson(), expected);
     });
+
+    test('fromJson construction', () {
+      final tableName = 'table_name';
+
+      final compareEmbed = DORMEmbed(table: tableName);
+
+      final json = {'table': tableName};
+
+      final equalEmbed = DORMEmbed.fromJson(json);
+
+      expect(compareEmbed, equalEmbed);
+    });
   });
 
   group('Default class functions', () {

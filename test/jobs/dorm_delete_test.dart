@@ -90,6 +90,77 @@ void main() {
 
       expect(delete.toJson(), expected);
     });
+
+    test('fromJson with Maximal object construction', () {
+      final tableName = 'table_name';
+
+      final where = [
+        DORMWhere<dynamic>(
+          column: 'column1_name',
+          value: 'column1_value',
+          condition: '=',
+        ),
+        DORMWhere<dynamic>(
+          column: 'column2_name',
+          value: 'column2_value',
+          condition: '=',
+        ),
+      ];
+
+      final before = DORMBefore(
+        jobs: [
+          DORMLastInsertId(
+            fromTable: 'last_insert_id_table_name',
+            setColumn: 'column_name',
+          ),
+          DORMFromBase64(['picture', 'file']),
+        ],
+      );
+
+      final after = DORMAfter(
+        jobs: [
+          DORMtoBase64(['picture', 'file']),
+        ],
+      );
+
+      final delete = DORMDelete(
+        from: tableName,
+        where: where,
+        before: before,
+        after: after,
+      );
+
+      final json = {
+        'job': 'delete',
+        'from': tableName,
+        'where': [
+          {
+            'column': 'column1_name',
+            'value': 'column1_value',
+            'condition': '=',
+          },
+          {
+            'column': 'column2_name',
+            'value': 'column2_value',
+            'condition': '=',
+          },
+        ],
+        'before': {
+          'lastInsertId': {
+            'fromTable': 'last_insert_id_table_name',
+            'setColumn': 'column_name',
+          },
+          'fromBase64': ['picture', 'file'],
+        },
+        'after': {
+          'toBase64': ['picture', 'file'],
+        },
+      };
+
+      final fromJson = DORMDelete.fromJson(json);
+
+      expect(fromJson, delete);
+    });
   });
 
   group('Default class functions', () {

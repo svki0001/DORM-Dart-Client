@@ -29,6 +29,20 @@ class DORMInsert extends DORMJob {
     return json;
   }
 
+  // TODO: Test this
+  factory DORMInsert.fromJson(Map<String, dynamic> json) {
+    return DORMInsert(
+      from: json['from'],
+      values: (json['values'] as Map<String, dynamic>)
+          .entries
+          .map((e) => DORMValue(
+                columnName: e.key,
+                value: e.value,
+              ))
+          .toList(),
+    );
+  }
+
   @override
   List<Object?> get props => [from, values, before, after];
 }

@@ -1,4 +1,6 @@
 import 'package:dorm_client/src/models/jobs/before/dorm_before_job.dart';
+import 'package:dorm_client/src/models/jobs/before/dorm_from_base64.dart';
+import 'package:dorm_client/src/models/jobs/before/dorm_last_insert_id.dart';
 import 'package:equatable/equatable.dart';
 
 class DORMBefore extends Equatable {
@@ -16,6 +18,23 @@ class DORMBefore extends Equatable {
     }
 
     return json;
+  }
+
+  // TODO: Test this
+  factory DORMBefore.fromJson(Map<String, dynamic> json) {
+    List<DORMBeforeJob> jobs = [];
+
+    json.forEach((key, value) {
+      if (key == 'fromBase64') {
+        jobs.add(DORMFromBase64.fromJson(value));
+      } else if (key == 'lastInsertId') {
+        jobs.add(DORMLastInsertId.fromJson(value));
+      } else {
+        throw Exception('Unknown job type: $key');
+      }
+    });
+
+    return DORMBefore(jobs: jobs);
   }
 
   @override

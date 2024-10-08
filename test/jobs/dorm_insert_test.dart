@@ -78,6 +78,61 @@ void main() {
 
       expect(insert.toJson(), expected);
     });
+
+    test('fromJson with Maximal object construction', () {
+      final tableName = 'table_name';
+
+      final values = [
+        DORMValue<dynamic>(columnName: 'column1_name', value: 'column1_value'),
+        DORMValue<dynamic>(columnName: 'column2_name', value: 'column2_value'),
+      ];
+
+      final before = DORMBefore(
+        jobs: [
+          DORMLastInsertId(
+            fromTable: 'last_insert_id_table_name',
+            setColumn: 'column_name',
+          ),
+          DORMFromBase64(['picture', 'file']),
+        ],
+      );
+
+      final after = DORMAfter(
+        jobs: [
+          DORMtoBase64(['picture', 'file']),
+        ],
+      );
+
+      final compareInsert = DORMInsert(
+        from: tableName,
+        values: values,
+        before: before,
+        after: after,
+      );
+
+      final json = {
+        'job': 'insert',
+        'from': tableName,
+        'values': {
+          'column1_name': 'column1_value',
+          'column2_name': 'column2_value',
+        },
+        'before': {
+          'lastInsertId': {
+            'fromTable': 'last_insert_id_table_name',
+            'setColumn': 'column_name',
+          },
+          'fromBase64': ['picture', 'file'],
+        },
+        'after': {
+          'toBase64': ['picture', 'file'],
+        },
+      };
+
+      final insert = DORMInsert.fromJson(json);
+
+      expect(insert, compareInsert);
+    });
   });
 
   group('Default class functions', () {
