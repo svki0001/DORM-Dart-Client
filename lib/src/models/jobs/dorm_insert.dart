@@ -28,4 +28,7 @@ class DORMInsert extends DORMJob {
 
     return json;
   }
+
+  @override
+  List<Object?> get props => [from, values, before, after];
 }

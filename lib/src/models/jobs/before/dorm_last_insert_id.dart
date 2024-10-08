@@ -16,4 +16,7 @@ class DORMLastInsertId extends DORMBeforeJob {
           "setColumn": setColumn,
         },
       };
+
+  @override
+  List<Object?> get props => [fromTable, setColumn];
 }

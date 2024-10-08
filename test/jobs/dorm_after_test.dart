@@ -24,4 +24,19 @@ void main() {
       expect(after.toJson(), expected);
     });
   });
+
+  group('Default class functions', () {
+    test('equals', () {
+      final job1 = DORMtoBase64(['picture', 'file']);
+      final job2 = DORMtoBase64(['picture', 'file']);
+      final job3 = DORMtoBase64(['file', 'picture']);
+
+      final compareAfter = DORMAfter(jobs: [job1]);
+      final equalAfter = DORMAfter(jobs: [job2]);
+      final unequalAfter = DORMAfter(jobs: [job3]);
+
+      expect(compareAfter, equalAfter);
+      expect(compareAfter, isNot(unequalAfter));
+    });
+  });
 }

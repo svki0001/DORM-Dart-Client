@@ -13,4 +13,18 @@ void main() {
       expect(column.toJson(), expected);
     });
   });
+
+  group('Default class functions', () {
+    test('equals', () {
+      final equalColumnName = 'column_name';
+      final unequalColumnName = 'name_column';
+
+      final compareColumn = DORMColumn(column: equalColumnName);
+      final equalColumn = DORMColumn(column: equalColumnName);
+      final unequalColumn = DORMColumn(column: unequalColumnName);
+
+      expect(compareColumn, equalColumn);
+      expect(compareColumn, isNot(unequalColumn));
+    });
+  });
 }

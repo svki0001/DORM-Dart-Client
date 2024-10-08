@@ -20,4 +20,21 @@ void main() {
       expect(order.toJson(), expected);
     });
   });
+
+  group('Default class functions', () {
+    test('equals', () {
+      final equalColumnName = 'column_name';
+      final equalSort = 'DESC';
+      final unequalColumnName = 'name_column';
+      final unequalSort = 'ASC';
+
+      final compareOrder = DORMOrder(column: equalColumnName, sort: equalSort);
+      final equalOrder = DORMOrder(column: equalColumnName, sort: equalSort);
+      final unequalOrder =
+          DORMOrder(column: unequalColumnName, sort: unequalSort);
+
+      expect(compareOrder, equalOrder);
+      expect(compareOrder, isNot(unequalOrder));
+    });
+  });
 }

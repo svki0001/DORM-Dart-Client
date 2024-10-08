@@ -33,4 +33,28 @@ void main() {
       expect(before.toJson(), expected);
     });
   });
+
+  group('Default class functions', () {
+    test('equals', () {
+      final job1 = DORMLastInsertId(
+        fromTable: 'last_insert_id_table_name',
+        setColumn: 'column_name',
+      );
+      final job2 = DORMLastInsertId(
+        fromTable: 'last_insert_id_table_name',
+        setColumn: 'column_name',
+      );
+      final job3 = DORMLastInsertId(
+        fromTable: 'table_name',
+        setColumn: 'name_column',
+      );
+
+      final compareBefore = DORMBefore(jobs: [job1]);
+      final equalBefore = DORMBefore(jobs: [job2]);
+      final unequalBefore = DORMBefore(jobs: [job3]);
+
+      expect(compareBefore, equalBefore);
+      expect(compareBefore, isNot(unequalBefore));
+    });
+  });
 }

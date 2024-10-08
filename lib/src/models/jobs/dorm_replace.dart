@@ -36,4 +36,7 @@ class DORMReplace extends DORMJob {
 
     return json;
   }
+
+  @override
+  List<Object?> get props => [from, values, where, before, after];
 }

@@ -91,4 +91,63 @@ void main() {
       expect(delete.toJson(), expected);
     });
   });
+
+  group('Default class functions', () {
+    test('equals', () {
+      final tableName = 'table_name';
+
+      final where = [
+        DORMWhere(
+          column: 'column1_name',
+          value: 'column1_value',
+          condition: '=',
+        ),
+        DORMWhere(
+          column: 'column2_name',
+          value: 'column2_value',
+          condition: '=',
+        ),
+      ];
+
+      final before = DORMBefore(
+        jobs: [
+          DORMLastInsertId(
+            fromTable: 'last_insert_id_table_name',
+            setColumn: 'column_name',
+          ),
+          DORMFromBase64(['picture', 'file']),
+        ],
+      );
+
+      final after = DORMAfter(
+        jobs: [
+          DORMtoBase64(['picture', 'file']),
+        ],
+      );
+
+      final delete1 = DORMDelete(
+        from: tableName,
+        where: where,
+        before: before,
+        after: after,
+      );
+
+      final delete2 = DORMDelete(
+        from: tableName,
+        where: where,
+        before: before,
+        after: after,
+      );
+
+      final delete3 = DORMDelete(
+        from: 'wrong_table_name',
+        where: where,
+        before: before,
+        after: after,
+      );
+
+      expect(delete1, delete2);
+      expect(delete1, isNot(delete3));
+    });
+  });
 }

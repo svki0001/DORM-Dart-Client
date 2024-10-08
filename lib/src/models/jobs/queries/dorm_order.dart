@@ -1,4 +1,6 @@
-class DORMOrder {
+import 'package:equatable/equatable.dart';
+
+class DORMOrder extends Equatable {
   final String column;
   final String sort;
 
@@ -11,4 +13,7 @@ class DORMOrder {
         'column': column,
         'sort': sort,
       };
+
+  @override
+  List<Object?> get props => [column, sort];
 }

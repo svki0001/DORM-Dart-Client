@@ -25,4 +25,7 @@ class DORMDelete extends DORMJob {
 
     return json;
   }
+
+  @override
+  List<Object?> get props => [from, where, before, after];
 }

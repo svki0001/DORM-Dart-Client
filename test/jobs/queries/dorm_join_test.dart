@@ -19,4 +19,24 @@ void main() {
       expect(join.toJson(), expected);
     });
   });
+
+  group('Default class functions', () {
+    test('equals', () {
+      final equalJoins = [
+        (tableName: 'table1_name', columnName: 'column1_name'),
+        (tableName: 'table2_name', columnName: 'column2_name'),
+      ];
+      final unequalJoins = [
+        (tableName: 'name_table1', columnName: 'column1_name'),
+        (tableName: 'table2_name', columnName: 'column2_name'),
+      ];
+
+      final compareJoin = DORMJoin(joins: equalJoins);
+      final equalJoin = DORMJoin(joins: equalJoins);
+      final unequalJoin = DORMJoin(joins: unequalJoins);
+
+      expect(compareJoin, equalJoin);
+      expect(compareJoin, isNot(unequalJoin));
+    });
+  });
 }

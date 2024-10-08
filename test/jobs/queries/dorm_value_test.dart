@@ -19,4 +19,23 @@ void main() {
       expect(value.toJson(), expected);
     });
   });
+
+  group('Default class functions', () {
+    test('equals', () {
+      final equalColumnName = 'column_name';
+      final equalColumnValue = 'column_value';
+      final unequalColumnName = 'name_column';
+      final unequalColumnValue = 'value_column';
+
+      final compareValue =
+          DORMValue(columnName: equalColumnName, value: equalColumnValue);
+      final equalValue =
+          DORMValue(columnName: equalColumnName, value: equalColumnValue);
+      final unequalValue =
+          DORMValue(columnName: unequalColumnName, value: unequalColumnValue);
+
+      expect(compareValue, equalValue);
+      expect(compareValue, isNot(unequalValue));
+    });
+  });
 }
