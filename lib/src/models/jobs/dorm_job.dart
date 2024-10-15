@@ -1,7 +1,8 @@
 import 'package:dorm_client/src/models/jobs/after/dorm_after.dart';
 import 'package:dorm_client/src/models/jobs/before/dorm_before.dart';
+import 'package:equatable/equatable.dart';
 
-abstract class DORMJob {
+abstract class DORMJob extends Equatable {
   final String job;
   final String from;
   final DORMBefore? before;

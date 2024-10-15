@@ -9,4 +9,7 @@ class DORMFromBase64 extends DORMBeforeJob {
   Map<String, dynamic> toJson() => {
         "fromBase64": columns,
       };
+
+  @override
+  List<Object?> get props => [columns];
 }

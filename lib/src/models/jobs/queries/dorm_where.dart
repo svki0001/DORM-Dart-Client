@@ -1,4 +1,6 @@
-class DORMWhere<T> {
+import 'package:equatable/equatable.dart';
+
+class DORMWhere<T> extends Equatable {
   final String? column;
   final T? value;
   final String condition;
@@ -31,4 +33,7 @@ class DORMWhere<T> {
 
     return json;
   }
+
+  @override
+  List<Object?> get props => [column, value, condition, op, val1, val2, where];
 }

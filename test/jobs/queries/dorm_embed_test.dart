@@ -13,4 +13,18 @@ void main() {
       expect(embed.toJson(), expected);
     });
   });
+
+  group('Default class functions', () {
+    test('equals', () {
+      final equalTableName = 'table_name';
+      final unequalTableName = 'name_table';
+
+      final compareEmbed = DORMEmbed(table: equalTableName);
+      final equalEmbed = DORMEmbed(table: equalTableName);
+      final unequalEmbed = DORMEmbed(table: unequalTableName);
+
+      expect(compareEmbed, equalEmbed);
+      expect(compareEmbed, isNot(unequalEmbed));
+    });
+  });
 }

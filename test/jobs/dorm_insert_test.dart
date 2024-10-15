@@ -79,4 +79,26 @@ void main() {
       expect(insert.toJson(), expected);
     });
   });
+
+  group('Default class functions', () {
+    test('equals', () {
+      final tableName = 'table_name';
+
+      final equalValues = [
+        DORMValue(columnName: 'column1_name', value: 'column1_value'),
+        DORMValue(columnName: 'column2_name', value: 'column2_value'),
+      ];
+      final unequalValues = [
+        DORMValue(columnName: 'name_column', value: 'column1_value'),
+        DORMValue(columnName: 'column2_name', value: 'column2_value'),
+      ];
+
+      final compareInsert = DORMInsert(from: tableName, values: equalValues);
+      final equalInsert = DORMInsert(from: tableName, values: equalValues);
+      final unequalInsert = DORMInsert(from: tableName, values: unequalValues);
+
+      expect(compareInsert, equalInsert);
+      expect(compareInsert, isNot(unequalInsert));
+    });
+  });
 }

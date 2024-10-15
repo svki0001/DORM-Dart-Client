@@ -1,4 +1,6 @@
-class DORMColumn {
+import 'package:equatable/equatable.dart';
+
+class DORMColumn extends Equatable {
   final String column;
 
   DORMColumn({
@@ -8,4 +10,7 @@ class DORMColumn {
   Map<String, dynamic> toJson() => {
         'column': column,
       };
+
+  @override
+  List<Object?> get props => [column];
 }

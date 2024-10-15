@@ -8,9 +8,10 @@ import 'package:dorm_client/src/models/jobs/dorm_replace.dart';
 import 'package:dorm_client/src/models/jobs/dorm_update.dart';
 import 'package:dorm_client/src/models/jobs/queries/dorm_value.dart';
 import 'package:dorm_client/src/models/jobs/queries/dorm_where.dart';
+import 'package:equatable/equatable.dart';
 
-class DORMRequest {
-  List<DORMJob> jobs = [];
+class DORMRequest extends Equatable {
+  final List<DORMJob> jobs = [];
 
   DORMRequest add(DORMJob job) {
     jobs.add(job);
@@ -78,4 +79,7 @@ class DORMRequest {
 
   List<Map<String, dynamic>> toJson() =>
       jobs.map((job) => job.toJson()).toList();
+
+  @override
+  List<Object?> get props => [jobs];
 }

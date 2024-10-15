@@ -1,6 +1,7 @@
 import 'package:dorm_client/src/models/jobs/before/dorm_before_job.dart';
+import 'package:equatable/equatable.dart';
 
-class DORMBefore {
+class DORMBefore extends Equatable {
   final List<DORMBeforeJob> jobs;
 
   DORMBefore({
@@ -16,4 +17,7 @@ class DORMBefore {
 
     return json;
   }
+
+  @override
+  List<Object?> get props => [jobs];
 }

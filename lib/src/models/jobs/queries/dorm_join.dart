@@ -1,4 +1,6 @@
-class DORMJoin {
+import 'package:equatable/equatable.dart';
+
+class DORMJoin extends Equatable {
   final List<({String tableName, String columnName})> joins;
 
   DORMJoin({
@@ -14,4 +16,7 @@ class DORMJoin {
 
     return json;
   }
+
+  @override
+  List<Object?> get props => [joins];
 }

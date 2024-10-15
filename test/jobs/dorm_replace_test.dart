@@ -106,4 +106,69 @@ void main() {
       expect(replace.toJson(), expected);
     });
   });
+
+  group('Default class functions', () {
+    test('equals', () {
+      final tableName = 'table_name';
+
+      final values = [
+        DORMValue(columnName: 'column1_name', value: 'column1_value'),
+        DORMValue(columnName: 'column2_name', value: 'column2_value'),
+      ];
+
+      final where = [
+        DORMWhere(
+          column: 'column1_name',
+          value: 'column1_value',
+          condition: '=',
+        ),
+        DORMWhere(
+          column: 'column2_name',
+          value: 'column2_value',
+          condition: '=',
+        ),
+      ];
+
+      final before = DORMBefore(
+        jobs: [
+          DORMLastInsertId(
+            fromTable: 'last_insert_id_table_name',
+            setColumn: 'column_name',
+          ),
+          DORMFromBase64(['picture', 'file']),
+        ],
+      );
+
+      final after = DORMAfter(
+        jobs: [
+          DORMtoBase64(['picture', 'file']),
+        ],
+      );
+
+      final compareReplace = DORMReplace(
+        from: tableName,
+        values: values,
+        where: where,
+        before: before,
+        after: after,
+      );
+      final equalReplace = DORMReplace(
+        from: tableName,
+        values: values,
+        where: where,
+        before: before,
+        after: after,
+      );
+      final unequalReplace = DORMReplace(
+        from: tableName,
+        values: values,
+        where: where,
+        before: before,
+        after: DORMAfter(jobs: []),
+      );
+
+      expect(compareReplace, equalReplace);
+      expect(compareReplace, isNot(unequalReplace));
+    });
+  });
 }

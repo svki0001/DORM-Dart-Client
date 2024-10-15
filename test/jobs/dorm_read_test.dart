@@ -147,4 +147,143 @@ void main() {
       expect(read.toJson(), expected);
     });
   });
+
+  group('Default class functions', () {
+    test('equals', () {
+      final tableName = 'table_name';
+
+      final columns = [
+        DORMColumn(column: 'column1_name'),
+        DORMColumn(column: 'column2_name'),
+      ];
+
+      final where = [
+        DORMWhere(
+          column: 'column1_name',
+          value: 'column1_value',
+          condition: '=',
+        ),
+        DORMWhere(
+          column: 'column2_name',
+          value: 'column2_value',
+          condition: '=',
+        ),
+      ];
+
+      final joins = [
+        DORMJoin(
+          joins: [
+            (tableName: 'table1_name', columnName: 'column1_name'),
+            (tableName: 'table2_name', columnName: 'column2_name'),
+          ],
+        ),
+      ];
+
+      final order = DORMOrder(
+        column: 'column_name',
+        sort: 'DESC',
+      );
+
+      final limit = 1000;
+
+      final embeds = [
+        DORMEmbed(table: 'embed1_table_name'),
+        DORMEmbed(table: 'embed2_table_name'),
+      ];
+
+      final before = DORMBefore(
+        jobs: [
+          DORMLastInsertId(
+            fromTable: 'last_insert_id_table_name',
+            setColumn: 'column_name',
+          ),
+          DORMFromBase64(['picture', 'file']),
+        ],
+      );
+
+      final after = DORMAfter(
+        jobs: [
+          DORMtoBase64(['picture', 'file']),
+        ],
+      );
+
+      final read1 = DORMRead(
+        from: tableName,
+        columns: columns,
+        where: where,
+        join: joins,
+        order: order,
+        limit: limit,
+        embed: embeds,
+        before: before,
+        after: after,
+      );
+
+      final read2 = DORMRead(
+        from: tableName,
+        columns: columns,
+        where: where,
+        join: joins,
+        order: order,
+        limit: limit,
+        embed: embeds,
+        before: before,
+        after: after,
+      );
+
+      final read3 = DORMRead(
+        from: 'table_name',
+        columns: [
+          DORMColumn(column: 'column1_name'),
+          DORMColumn(column: 'column2_name'),
+        ],
+        where: [
+          DORMWhere(
+            column: 'column1_name',
+            value: 'column1_value',
+            condition: '=',
+          ),
+          DORMWhere(
+            column: 'column2_name',
+            value: 'column2_value',
+            condition: '=',
+          ),
+        ],
+        join: [
+          DORMJoin(
+            joins: [
+              (tableName: 'table1_name', columnName: 'column1_name'),
+              (tableName: 'table2_name', columnName: 'column2_name'),
+            ],
+          ),
+        ],
+        order: DORMOrder(
+          column: 'column_name',
+          sort: 'DESC',
+        ),
+        limit: 1000,
+        embed: [
+          DORMEmbed(table: 'embed1_table_name'),
+          DORMEmbed(table: 'embed2_table_name'),
+        ],
+        before: DORMBefore(
+          jobs: [
+            DORMLastInsertId(
+              fromTable: 'last_insert_id_table_name',
+              setColumn: 'column_name',
+            ),
+            DORMFromBase64(['picture', 'file']),
+          ],
+        ),
+        after: DORMAfter(
+          jobs: [
+            DORMtoBase64(['picture', 'file']),
+          ],
+        ),
+      );
+
+      expect(read1, read2);
+      expect(read1, isNot(read3));
+    });
+  });
 }

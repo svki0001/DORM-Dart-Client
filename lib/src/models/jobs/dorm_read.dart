@@ -52,4 +52,8 @@ class DORMRead extends DORMJob {
 
     return json;
   }
+
+  @override
+  List<Object?> get props =>
+      [from, columns, where, join, order, limit, embed, before, after];
 }

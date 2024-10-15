@@ -1,4 +1,6 @@
-class DORMEmbed {
+import 'package:equatable/equatable.dart';
+
+class DORMEmbed extends Equatable {
   final String table;
 
   DORMEmbed({
@@ -8,4 +10,7 @@ class DORMEmbed {
   Map<String, dynamic> toJson() => {
         'table': table,
       };
+
+  @override
+  List<Object?> get props => [table];
 }
