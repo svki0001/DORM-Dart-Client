@@ -1,3 +1,5 @@
+import 'package:dorm_client/src/models/jobs/after/dorm_after.dart';
+import 'package:dorm_client/src/models/jobs/before/dorm_before.dart';
 import 'package:dorm_client/src/models/jobs/dorm_job.dart';
 import 'package:dorm_client/src/models/jobs/queries/dorm_value.dart';
 
@@ -27,6 +29,22 @@ class DORMInsert extends DORMJob {
     json["values"] = insertValues;
 
     return json;
+  }
+
+  factory DORMInsert.fromJson(Map<String, dynamic> json) {
+    return DORMInsert(
+      from: json['from'],
+      values: (json['values'] as Map<String, dynamic>)
+          .entries
+          .map((e) => DORMValue(
+                columnName: e.key,
+                value: e.value,
+              ))
+          .toList(),
+      after: json['after'] != null ? DORMAfter.fromJson(json['after']) : null,
+      before:
+          json['before'] != null ? DORMBefore.fromJson(json['before']) : null,
+    );
   }
 
   @override

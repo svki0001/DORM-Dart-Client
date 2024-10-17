@@ -14,6 +14,13 @@ class DORMOrder extends Equatable {
         'sort': sort,
       };
 
+  factory DORMOrder.fromJson(Map<String, dynamic> json) {
+    return DORMOrder(
+      column: json['column'],
+      sort: json['sort'],
+    );
+  }
+
   @override
   List<Object?> get props => [column, sort];
 }

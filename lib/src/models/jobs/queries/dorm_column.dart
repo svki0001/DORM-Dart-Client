@@ -11,6 +11,12 @@ class DORMColumn extends Equatable {
         'column': column,
       };
 
+  factory DORMColumn.fromJson(Map<String, dynamic> json) {
+    return DORMColumn(
+      column: json['column'],
+    );
+  }
+
   @override
   List<Object?> get props => [column];
 }

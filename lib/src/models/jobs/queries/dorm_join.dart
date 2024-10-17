@@ -17,6 +17,18 @@ class DORMJoin extends Equatable {
     return json;
   }
 
+  factory DORMJoin.fromJson(Map<String, dynamic> json) {
+    List<({String tableName, String columnName})> joins = [];
+
+    json.forEach((key, value) {
+      joins.add((tableName: key, columnName: value));
+    });
+
+    return DORMJoin(
+      joins: joins,
+    );
+  }
+
   @override
   List<Object?> get props => [joins];
 }

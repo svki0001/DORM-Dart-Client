@@ -10,6 +10,11 @@ class DORMFromBase64 extends DORMBeforeJob {
         "fromBase64": columns,
       };
 
+  // TODO: Test this
+  factory DORMFromBase64.fromJson(Object json) {
+    return DORMFromBase64(json as List<String>);
+  }
+
   @override
   List<Object?> get props => [columns];
 }

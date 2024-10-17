@@ -1,3 +1,5 @@
+import 'package:dorm_client/src/models/jobs/after/dorm_after.dart';
+import 'package:dorm_client/src/models/jobs/before/dorm_before.dart';
 import 'package:dorm_client/src/models/jobs/dorm_job.dart';
 import 'package:dorm_client/src/models/jobs/queries/dorm_value.dart';
 import 'package:dorm_client/src/models/jobs/queries/dorm_where.dart';
@@ -35,6 +37,27 @@ class DORMReplace extends DORMJob {
     }
 
     return json;
+  }
+
+  // TODO: Test this
+  factory DORMReplace.fromJson(Map<String, dynamic> json) {
+    return DORMReplace(
+      from: json['from'],
+      values: (json['values'] as Map<String, dynamic>)
+          .entries
+          .map(
+            (e) => DORMValue.fromJson(
+              {e.key: e.value},
+            ),
+          )
+          .toList(),
+      where: (json['where'] as List<dynamic>?)
+          ?.map((whereElement) => DORMWhere.fromJson(whereElement))
+          .toList(),
+      after: json['after'] != null ? DORMAfter.fromJson(json['after']) : null,
+      before:
+          json['before'] != null ? DORMBefore.fromJson(json['before']) : null,
+    );
   }
 
   @override

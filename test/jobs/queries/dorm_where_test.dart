@@ -78,6 +78,92 @@ void main() {
 
       expect(join.toJson(), expected);
     });
+
+    // TODO: Check json from DORM
+    test('Single value condition, fromJson construction', () {
+      final compareWhere = DORMWhere<String>(
+        column: 'column_name',
+        value: 'column_value',
+        condition: '=',
+      );
+
+      final json = {
+        'column': 'column_name',
+        'value': 'column_value',
+        'condition': '=',
+      };
+
+      // Note: Don't forget to add the type parameter to the fromJson method
+      final equalWhere = DORMWhere<String>.fromJson(json);
+
+      expect(compareWhere, equalWhere);
+    });
+
+    // TODO: Check json from DORM
+    test('Multiple values condition, fromJson construction', () {
+      final compareWhere = DORMWhere(
+        op: 'AND',
+        column: 'column_name',
+        val1: 'column_value1',
+        val2: 'column_value2',
+        condition: 'BETWEEN',
+      );
+
+      final json = {
+        'op': 'AND',
+        'column': 'column_name',
+        'val1': 'column_value1',
+        'val2': 'column_value2',
+        'condition': 'BETWEEN',
+      };
+
+      final equalWhere = DORMWhere.fromJson(json);
+
+      expect(compareWhere, equalWhere);
+    });
+
+    // TODO: Check json from DORM
+    test('Nested, fromJson construction', () {
+      final compareWhere = DORMWhere(
+        condition: 'block',
+        where: [
+          DORMWhere<dynamic>(
+            column: 'column_name',
+            value: 'column_value',
+            condition: '=',
+          ),
+          DORMWhere<dynamic>(
+            op: 'AND',
+            column: 'column_name',
+            val1: 'column_value1',
+            val2: 'column_value2',
+            condition: 'BETWEEN',
+          ),
+        ],
+      );
+
+      final json = {
+        'condition': 'block',
+        'where': [
+          {
+            'column': 'column_name',
+            'value': 'column_value',
+            'condition': '=',
+          },
+          {
+            'op': 'AND',
+            'column': 'column_name',
+            'val1': 'column_value1',
+            'val2': 'column_value2',
+            'condition': 'BETWEEN',
+          },
+        ],
+      };
+
+      final equalWhere = DORMWhere.fromJson(json);
+
+      expect(compareWhere, equalWhere);
+    });
   });
 
   group('Default class functions', () {

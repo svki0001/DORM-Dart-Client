@@ -1,3 +1,5 @@
+import 'package:dorm_client/src/models/jobs/after/dorm_after.dart';
+import 'package:dorm_client/src/models/jobs/before/dorm_before.dart';
 import 'package:dorm_client/src/models/jobs/queries/dorm_column.dart';
 import 'package:dorm_client/src/models/jobs/queries/dorm_embed.dart';
 import 'package:dorm_client/src/models/jobs/queries/dorm_join.dart';
@@ -51,6 +53,30 @@ class DORMRead extends DORMJob {
     json.addAll(readJson);
 
     return json;
+  }
+
+  // TODO: Test this
+  factory DORMRead.fromJson(Map<String, dynamic> json) {
+    return DORMRead(
+      from: json['from'],
+      columns: (json['columns'] as List<dynamic>?)
+          ?.map((column) => DORMColumn.fromJson(column))
+          .toList(),
+      where: (json['where'] as List<dynamic>?)
+          ?.map((whereElement) => DORMWhere.fromJson(whereElement))
+          .toList(),
+      join: (json['join'] as List<dynamic>?)
+          ?.map((joinElement) => DORMJoin.fromJson(joinElement))
+          .toList(),
+      order: json['order'] != null ? DORMOrder.fromJson(json['order']) : null,
+      limit: json['limit'],
+      embed: (json['embed'] as List<dynamic>?)
+          ?.map((embedElement) => DORMEmbed.fromJson(embedElement))
+          .toList(),
+      after: json['after'] != null ? DORMAfter.fromJson(json['after']) : null,
+      before:
+          json['before'] != null ? DORMBefore.fromJson(json['before']) : null,
+    );
   }
 
   @override

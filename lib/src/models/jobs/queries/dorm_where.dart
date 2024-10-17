@@ -34,6 +34,23 @@ class DORMWhere<T> extends Equatable {
     return json;
   }
 
+  // TODO: Test this
+  factory DORMWhere.fromJson(Map<String, dynamic> json) {
+    return DORMWhere(
+      column: json['column'],
+      value: json['value'],
+      condition: json['condition'],
+      op: json['op'],
+      val1: json['val1'],
+      val2: json['val2'],
+      where: (json['where'] as List<Map<String, dynamic>>?)?.map(
+        (whereElement) {
+          return DORMWhere.fromJson(whereElement) as DORMWhere<T>;
+        },
+      ).toList(),
+    );
+  }
+
   @override
   List<Object?> get props => [column, value, condition, op, val1, val2, where];
 }

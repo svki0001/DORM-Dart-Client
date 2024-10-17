@@ -12,6 +12,18 @@ void main() {
 
       expect(column.toJson(), expected);
     });
+
+    test('fromJson construction', () {
+      final columnName = 'column_name';
+
+      final compareColumn = DORMColumn(column: columnName);
+
+      final json = {'column': columnName};
+
+      final equalColumn = DORMColumn.fromJson(json);
+
+      expect(compareColumn, equalColumn);
+    });
   });
 
   group('Default class functions', () {

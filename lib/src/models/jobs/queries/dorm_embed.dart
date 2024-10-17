@@ -11,6 +11,12 @@ class DORMEmbed extends Equatable {
         'table': table,
       };
 
+  factory DORMEmbed.fromJson(Map<String, dynamic> json) {
+    return DORMEmbed(
+      table: json['table'],
+    );
+  }
+
   @override
   List<Object?> get props => [table];
 }

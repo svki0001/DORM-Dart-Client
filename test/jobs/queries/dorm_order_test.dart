@@ -19,6 +19,25 @@ void main() {
 
       expect(order.toJson(), expected);
     });
+
+    test('fromJson construction', () {
+      final columnName = 'column_name';
+      final sort = 'DESC';
+
+      final compareOrder = DORMOrder(
+        column: columnName,
+        sort: sort,
+      );
+
+      final json = {
+        'column': columnName,
+        'sort': sort,
+      };
+
+      final equalOrder = DORMOrder.fromJson(json);
+
+      expect(compareOrder, equalOrder);
+    });
   });
 
   group('Default class functions', () {
