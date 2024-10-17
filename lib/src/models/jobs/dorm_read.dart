@@ -1,3 +1,5 @@
+import 'package:dorm_client/src/models/jobs/after/dorm_after.dart';
+import 'package:dorm_client/src/models/jobs/before/dorm_before.dart';
 import 'package:dorm_client/src/models/jobs/queries/dorm_column.dart';
 import 'package:dorm_client/src/models/jobs/queries/dorm_embed.dart';
 import 'package:dorm_client/src/models/jobs/queries/dorm_join.dart';
@@ -71,6 +73,9 @@ class DORMRead extends DORMJob {
       embed: (json['embed'] as List<dynamic>?)
           ?.map((embedElement) => DORMEmbed.fromJson(embedElement))
           .toList(),
+      after: json['after'] != null ? DORMAfter.fromJson(json['after']) : null,
+      before:
+          json['before'] != null ? DORMBefore.fromJson(json['before']) : null,
     );
   }
 
