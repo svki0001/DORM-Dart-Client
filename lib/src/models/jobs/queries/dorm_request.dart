@@ -82,12 +82,11 @@ class DORMRequest extends Equatable {
   List<Map<String, dynamic>> toJson() =>
       jobs.map((job) => job.toJson()).toList();
 
-  // TODO: Test this
   factory DORMRequest.fromJson(List<Map<String, dynamic>> json) {
     final DORMRequest request = DORMRequest();
 
     for (final Map<String, dynamic> job in json) {
-      final String type = job['type'];
+      final String type = job['job'];
 
       switch (type) {
         case 'read':

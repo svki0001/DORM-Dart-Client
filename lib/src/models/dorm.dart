@@ -9,12 +9,14 @@ class DORM {
   final String schema; // e.g. DORM 0.0.6
   String? url; // your default DORM api location
   final String token;
+  final bool strictString;
 
   DORM({
     required this.schema,
     this.url,
-    required this.token,
-  }); // your DORM token
+    required this.token, // your DORM token
+    this.strictString = false,
+  });
 
   Future<Response> postRaw(DORMRequest request,
       {String? overriddenUrl, String? authorization}) async {
@@ -23,6 +25,7 @@ class DORM {
         'schema': schema,
         'token': token,
         'jobs': request.toJson(),
+        'apiConfig': {'nocheck': strictString}
       };
 
       if (overriddenUrl == null && url == null) {
@@ -43,11 +46,6 @@ class DORM {
       );
 
       return response;
-      // } catch (error) {
-      //   throw DROMServerException(
-      //       message:
-      //           "Couldn't connect with DORM server. Please check if the server is running or your configuration is correct. \n Error was: ${error.toString()}");
-      // }
     } catch (error) {
       int statusCode = 400;
       if (error is DioException) {
